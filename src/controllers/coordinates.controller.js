@@ -8,7 +8,8 @@ class CoordinatesController{
 		try {
 			const {address} = req.body;
 			const interactor = new CoordinatesInteractor();
-			const respond = await interactor.searchCoordinates(address);
+			let respond = await interactor.searchCoordinates(address);
+			if(!respond) respond = {message:'Coordinates not found'}
 			res.json(respond);
 		} catch (error) {
 			console.error(error);
